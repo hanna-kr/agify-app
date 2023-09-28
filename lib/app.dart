@@ -1,4 +1,4 @@
-import 'package:agify_app/features/onboarding/presentation/welcome_page.dart';
+import 'package:agify_app/features/onboarding/presentation/splash.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,6 +6,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: 'Agify App', home: WelcomePage());
+    return const MaterialApp(title: 'Agify App', home: SplashScreen());
   }
 }
