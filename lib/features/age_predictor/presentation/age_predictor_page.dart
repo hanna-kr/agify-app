@@ -50,7 +50,7 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
       setState(() {
         isLoading = false;
       });
-      throw Exception('Failed to fetch user data');
+      throw Exception('Userdaten konnten nicht geladen werden');
     }
   }
 
