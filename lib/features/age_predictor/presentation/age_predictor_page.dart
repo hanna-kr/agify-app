@@ -104,6 +104,7 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
           contentPadding: const EdgeInsets.all(8.0),
           actions: <Widget>[
             ElevatedButton(
+              style: kPrimaryButtonStyle,
               child: const Text('OK'),
               onPressed: () {
                 Navigator.of(dialogContext).pop();
