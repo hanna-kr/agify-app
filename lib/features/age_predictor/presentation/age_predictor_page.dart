@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:agify_app/core/presentation/styles/button_styles.dart';
 import 'package:agify_app/core/presentation/styles/color_styles.dart';
 import 'package:agify_app/core/presentation/styles/spacing_styles.dart';
 import 'package:agify_app/core/presentation/styles/text_styles.dart';
@@ -68,7 +69,8 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  child: Text('beenden'),
+                  style: kSecondaryButtonStyle,
+                  child: const Text('beenden'),
                   onPressed: () {
                     resetText();
                     Navigator.of(dialogContext)
@@ -76,7 +78,8 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text('nochmal'),
+                  style: kPrimaryButtonStyle,
+                  child: const Text('nochmal'),
                   onPressed: () {
                     resetText();
                     Navigator.of(dialogContext).pop();
@@ -95,13 +98,13 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: Text('Error'),
+          title: const Text('Error'),
           titlePadding: const EdgeInsets.all(8.0),
-          content: Text('Failed to fetch user data'),
+          content: const Text('Failed to fetch user data'),
           contentPadding: const EdgeInsets.all(8.0),
           actions: <Widget>[
             ElevatedButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(dialogContext).pop();
               },
