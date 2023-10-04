@@ -1,4 +1,4 @@
-import 'package:agify_app/features/onboarding/presentation/splash.dart';
+import 'package:agify_app/features/onboarding/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {

@@ -3,15 +3,29 @@ import 'package:flutter/material.dart';
 
 class MyTextStyle {
   static const headline1 = TextStyle(
-      fontSize: 16, fontWeight: FontWeight.bold, color: MyColor.primaryDark);
+      fontFamily: 'Poppins',
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: MyColor.black);
 
   static const headline2 = TextStyle(
-      fontSize: 20, fontWeight: FontWeight.bold, color: MyColor.primaryDark);
+      fontFamily: 'Poppins',
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      color: MyColor.black);
 
-  static const light = TextStyle(color: MyColor.white, fontSize: 20);
+  static const light =
+      TextStyle(fontFamily: 'Poppins', color: MyColor.white, fontSize: 20);
 
   static const buttonLight = TextStyle(
-      fontSize: 18, fontWeight: FontWeight.bold, color: MyColor.white);
+      fontFamily: 'Poppins',
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+      color: MyColor.white);
 
-  static const body = TextStyle(fontSize: 16, color: MyColor.primaryDark);
+  static const body =
+      TextStyle(fontFamily: 'Poppins', fontSize: 16, color: MyColor.black);
+
+  static const hintText =
+      TextStyle(fontFamily: 'Poppins', fontSize: 14, color: MyColor.blue);
 }
