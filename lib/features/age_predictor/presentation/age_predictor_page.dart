@@ -100,7 +100,7 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
         return AlertDialog(
           title: const Text('Error'),
           titlePadding: const EdgeInsets.all(8.0),
-          content: const Text('Failed to fetch user data'),
+          content: const Text('Userdaten konnten nicht geladen werden'),
           contentPadding: const EdgeInsets.all(8.0),
           actions: <Widget>[
             ElevatedButton(
