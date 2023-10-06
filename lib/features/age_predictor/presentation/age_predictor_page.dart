@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:agify_app/core/data/remote_data_source.dart';
 import 'package:agify_app/core/presentation/styles/button_styles.dart';
 import 'package:agify_app/core/presentation/styles/color_styles.dart';
 import 'package:agify_app/core/presentation/styles/spacing_styles.dart';
@@ -6,7 +7,6 @@ import 'package:agify_app/core/presentation/styles/text_styles.dart';
 import 'package:agify_app/core/presentation/widgets/primary_button.dart';
 import 'package:agify_app/features/age_predictor/domain/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class AgePredictorPage extends StatefulWidget {
   const AgePredictorPage({super.key});
@@ -20,6 +20,36 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
   String name = '';
   bool isLoading = false;
 
+  final RemoteDataSource remoteDataSource = RemoteDataSource();
+
+  Future<User> fetchAge(String name) async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      Uri url = Uri.parse('https://api.agify.io?name=$name');
+      dynamic responseData = await remoteDataSource.getData(url.toString());
+      var jsonResponse = jsonDecode(responseData);
+      if (jsonResponse != null) {
+        setState(() {
+          isLoading = false;
+        });
+        return User.fromJson(jsonResponse);
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        throw Exception('Userdaten konnten nicht geladen werden');
+      }
+    } catch (err) {
+      setState(() {
+        isLoading = false;
+      });
+      rethrow;
+    }
+  }
+
   void setText() {
     setState(() {
       name = textController.text;
@@ -31,27 +61,6 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
     setState(() {
       textController.clear();
     });
-  }
-
-  Future<User> fetchAge(String name) async {
-    setState(() {
-      isLoading = true;
-    });
-
-    Uri url = Uri.parse('https://api.agify.io?name=$name');
-    http.Response response = await http.get(url);
-    var jsonResponse = jsonDecode(response.body);
-    if (jsonResponse != null) {
-      setState(() {
-        isLoading = false;
-      });
-      return User.fromJson(jsonResponse);
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-      throw Exception('Userdaten konnten nicht geladen werden');
-    }
   }
 
   void showResult(User user) {
