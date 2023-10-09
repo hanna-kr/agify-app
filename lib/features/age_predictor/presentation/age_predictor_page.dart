@@ -1,10 +1,9 @@
-import 'dart:convert';
-import 'package:agify_app/core/data/remote_data_source.dart';
 import 'package:agify_app/core/presentation/styles/button_styles.dart';
 import 'package:agify_app/core/presentation/styles/color_styles.dart';
 import 'package:agify_app/core/presentation/styles/spacing_styles.dart';
 import 'package:agify_app/core/presentation/styles/text_styles.dart';
 import 'package:agify_app/core/presentation/widgets/primary_button.dart';
+import 'package:agify_app/features/age_predictor/application/user_data_service.dart';
 import 'package:agify_app/features/age_predictor/domain/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -20,35 +19,7 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
   String name = '';
   bool isLoading = false;
 
-  final RemoteDataSource remoteDataSource = RemoteDataSource();
-
-  Future<User> fetchAge(String name) async {
-    setState(() {
-      isLoading = true;
-    });
-
-    try {
-      Uri url = Uri.parse('https://api.agify.io?name=$name');
-      dynamic responseData = await remoteDataSource.getData(url.toString());
-      var jsonResponse = jsonDecode(responseData);
-      if (jsonResponse != null) {
-        setState(() {
-          isLoading = false;
-        });
-        return User.fromJson(jsonResponse);
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-        throw Exception('Userdaten konnten nicht geladen werden');
-      }
-    } catch (err) {
-      setState(() {
-        isLoading = false;
-      });
-      rethrow;
-    }
-  }
+  UserDataService userDataService = UserDataService();
 
   void setText() {
     setState(() {
@@ -127,11 +98,21 @@ class _AgePredictorPageState extends State<AgePredictorPage> {
 
   void fetchAgeAndShowResult() async {
     setText();
+    bool loading = true;
+
     try {
-      User user = await fetchAge(name);
+      setState(() {
+        isLoading = loading;
+      });
+
+      User user = await userDataService.fetchUserData(name);
       showResult(user);
     } catch (e) {
       showErrorDialog();
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
